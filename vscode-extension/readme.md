@@ -1,8 +1,8 @@
-# Noir for Visual Studio Code
+# Noir Dawn for Visual Studio Code
 
-![Noir](https://github.com/tahasadough/noir-vscode/raw/HEAD/icon.png)
+![Noir Dawn](https://github.com/tahasadough/noir-vscode/raw/HEAD/icon.png)
 
-A dark theme for Visual Studio Code. Pure black background, warm grey text,
+A dark theme for Visual Studio Code. Soft black background (`#1c1c1c`), warm grey text,
 muted sage accents.
 
 ## Install
@@ -14,14 +14,14 @@ code --install-extension tahasadough.noir-omarchy
 ```
 
 Or search **Noir Omarchy** in the Extensions view. Then open the Command
-Palette (`Ctrl+Shift+P`) → **Preferences: Color Theme** → select **Noir**.
+Palette (`Ctrl+Shift+P`) → **Preferences: Color Theme** → select **Noir Dawn**.
 
 ### From source
 
 ```bash
 npm install -g @vscode/vsce
 vsce package
-code --install-extension noir-omarchy-0.1.1.vsix
+code --install-extension noir-omarchy-0.2.0.vsix
 ```
 
 ### From folder (dev)
@@ -44,14 +44,14 @@ code --install-extension noir-omarchy-0.1.1.vsix
 }
 ```
 
-2. Select **Noir** from the color theme picker.
+2. Select **Noir Dawn** from the color theme picker.
 
 ## Palette
 
 | Role       | Hex       | Used for                |
 | ---------- | --------- | ----------------------- |
-| `bg`       | `#000000` | Editor background       |
-| `alt_bg`   | `#1c1c1c` | Panels, hovers, status  |
+| `bg`       | `#1c1c1c` | Editor background       |
+| `alt_bg`   | `#333333` | Panels, hovers, status  |
 | `fg`       | `#c1c1c1` | Foreground              |
 | `comment`  | `#505050` | Comments                |
 | `constant` | `#aaaaaa` | Constants, numbers      |
@@ -60,7 +60,7 @@ code --install-extension noir-omarchy-0.1.1.vsix
 | `operator` | `#9b99a3` | Operators, punctuation  |
 | `string`   | `#aa9988` | Strings                 |
 | `type`     | `#777755` | Types, classes          |
-| `visual`   | `#333333` | Selection               |
+| `visual`   | `#505050` | Selection               |
 | `accent`   | `#8a9a7b` | Accent, focus, tags     |
 
 ## License

@@ -19,14 +19,9 @@
 	"contributes": {
 		"themes": [
 			{
-				"label": "Noir",
-				"uiTheme": "vs-dark",
-				"path": "./themes/noir-color-theme.json"
-			},
-			{
 				"label": "Noir Dawn",
 				"uiTheme": "vs-dark",
-				"path": "./themes/noir-dawn-color-theme.json"
+				"path": "./themes/noir-color-theme.json"
 			}
 		]
 	}

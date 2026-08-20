@@ -1,4 +1,4 @@
-# Noir — Omarchy theme (Dawn variant)
+# Noir Dawn — Omarchy theme
 
 A dark theme for the whole desktop. Soft black background (`#1c1c1c`), warm grey text,
 muted sage accents. Includes matching Neovim and Zed themes.
@@ -9,7 +9,7 @@ defaults by the theme system.
 
 ## Preview
 
-![Noir preview](preview.png)
+![Noir Dawn preview](preview.png)
 
 ## Palette
 
@@ -25,14 +25,8 @@ defaults by the theme system.
 | `operator` | `#9b99a3` | Operators, punctuation |
 | `string`   | `#aa9988` | Strings                |
 | `type`     | `#777755` | Types, classes         |
-| `visual`   | `#333333` | Selection              |
+| `visual`   | `#505050` | Selection              |
 | `accent`   | `#8a9a7b` | Accent, focus, tags    |
-
-## Variant
-
-This is the **dawn** variant — a softer black that's easier on the eyes
-in well-lit environments. For pure black (`#000000`), use the main
-[omarchy-noir-theme](https://github.com/tahadx/omarchy-noir-theme) repo.
 
 ## License
 
