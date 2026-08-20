@@ -1,10 +1,10 @@
 [colors]
 [colors.primary]
-background = "#1c1c1c"
+background = "#0c0b0c"
 foreground = "#c1c1c1"
 
 [colors.cursor]
-text   = "#1c1c1c"
+text   = "#0c0b0c"
 cursor = "#c1c1c1"
 
 [colors.selection]

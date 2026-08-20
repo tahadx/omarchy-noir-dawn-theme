@@ -8,17 +8,17 @@ cursor = "#c1c1c1"
 
 # Primary colors
 foreground = "#c1c1c1"
-background = "#1c1c1c"
+background = "#0c0b0c"
 
 # Selection colors
 selection_foreground = "#c1c1c1"
 selection_background = "#333333"
 
 # Background shades
-bg = "#1c1c1c"
+bg = "#0c0b0c"
 lighter_bg = "#505050"
 dark_bg = "#333333"
-darker_bg = "#1c1c1c"
+darker_bg = "#0c0b0c"
 
 # Foreground shades
 fg = "#c1c1c1"
