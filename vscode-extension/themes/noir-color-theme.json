@@ -139,12 +139,12 @@
 		"editorBracketHighlight.foreground3": "#8a9a7b",
 		"editorBracketHighlight.foreground4": "#aaaaaa",
 		"editorBracketHighlight.foreground5": "#999999",
-		"editorBracketHighlight.foreground6": "#777755",
+		"editorBracketHighlight.foreground6": "#888888",
 		"editorBracketHighlight.unexpectedBracket.foreground": "#8a9a7b",
 		"editorBracketPairGuide.background1": "#505050",
 		"editorBracketPairGuide.activeBackground1": "#8a9a7b",
 		"editorGutter.background": "#0c0b0c",
-		"editorGutter.addedBackground": "#6e4c4c",
+		"editorGutter.addedBackground": "#888888",
 		"editorGutter.modifiedBackground": "#8a9a7b",
 		"editorGutter.deletedBackground": "#8a9a7b",
 		"editorRuler.foreground": "#1c1c1c",
@@ -174,7 +174,7 @@
 
 		"editorOverviewRuler.border": "#0c0b0c",
 		"editorOverviewRuler.selectionHighlightForeground": "#333333",
-		"editorOverviewRuler.addedForeground": "#6e4c4c",
+		"editorOverviewRuler.addedForeground": "#888888",
 		"editorOverviewRuler.modifiedForeground": "#8a9a7b",
 		"editorOverviewRuler.deletedForeground": "#8a9a7b",
 		"editorOverviewRuler.errorForeground": "#8a9a7b",
@@ -328,7 +328,7 @@
 		"welcomePage.progress.foreground": "#8a9a7b",
 		"walkThrough.embeddedEditorBackground": "#0c0b0c",
 
-		"gitDecoration.addedResourceForeground": "#6e4c4c",
+		"gitDecoration.addedResourceForeground": "#888888",
 		"gitDecoration.modifiedResourceForeground": "#8a9a7b",
 		"gitDecoration.deletedResourceForeground": "#8a9a7b",
 		"gitDecoration.untrackedResourceForeground": "#8a9a7b",
@@ -530,7 +530,7 @@
 				"punctuation.terminator.statement"
 			],
 			"settings": {
-				"foreground": "#9b99a3"
+				"foreground": "#999999"
 			}
 		},
 		{
@@ -718,7 +718,7 @@
 				"meta.definition.type"
 			],
 			"settings": {
-				"foreground": "#777755"
+				"foreground": "#888888"
 			}
 		},
 		{
@@ -906,7 +906,7 @@
 				"punctuation.definition.list"
 			],
 			"settings": {
-				"foreground": "#9b99a3"
+				"foreground": "#999999"
 			}
 		},
 		{
@@ -937,7 +937,7 @@
 				"markup.inserted.markdown"
 			],
 			"settings": {
-				"foreground": "#6e4c4c"
+				"foreground": "#888888"
 			}
 		},
 		{
@@ -1005,7 +1005,7 @@
 				"entity.name.package"
 			],
 			"settings": {
-				"foreground": "#777755"
+				"foreground": "#888888"
 			}
 		}
 	]
