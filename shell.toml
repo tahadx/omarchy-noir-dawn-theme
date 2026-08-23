@@ -7,8 +7,10 @@
 background       = "#0c0b0c"
 background-alpha = 1.0
 text             = "#c1c1c1"
-# Modules calling attention to themselves (recording, voxtype, alerts, updates)
-active           = "#8a9a7b"
+# Modules calling attention to themselves (recording, voxtype, alerts, updates).
+# Kept identical to `text`: quickshell paints active indicators with this token,
+# and Noir Dawn wants them white like every other icon.
+active           = "#c1c1c1"
 # Cross-axis size at font base-size 12. size-horizontal is the height of
 # top/bottom bars; size-vertical is the width of left/right bars. With
 # scale-with-font enabled, these grow/shrink with [font] base-size.
