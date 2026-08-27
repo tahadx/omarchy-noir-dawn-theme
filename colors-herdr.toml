@@ -1,0 +1,28 @@
+schema = 1
+
+[theme]
+name = "noir-dawn"
+auto_switch = false
+dark_name = "Noir"
+light_name = "Dawn"
+
+[theme.custom]
+accent = "#8a9a7b"
+panel_bg = "#0c0b0c"
+sidebar_bg = "#141312"
+active_row_bg = "#252322"
+selection_bg = "#333333"
+surface0 = "#1a1918"
+surface1 = "#252322"
+surface_dim = "#141312"
+overlay0 = "#666666"
+overlay1 = "#8a857c"
+text = "#c1c1c1"
+subtext0 = "#666666"
+mauve = "#9ca98f"
+green = "#8a9a7b"
+yellow = "#aaaaaa"
+red = "#9ca98f"
+blue = "#aa9988"
+teal = "#aa9988"
+peach = "#9ca98f"
