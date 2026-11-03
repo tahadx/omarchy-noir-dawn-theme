@@ -54,7 +54,8 @@ From a clone of the repo:
 
 The script links `~/.config/nvim/lua/plugins/theme.lua` to Omarchy's generated
 `neovim.lua`, which uses [aether.nvim](https://github.com/omacom/aether.nvim)
-with the theme's palette. If you prefer the dedicated
+with the theme's palette. If a Neovim is already running, the script also tells
+it to re-apply the colorscheme. If you prefer the dedicated
 [noir.nvim](https://github.com/tahadx/noir.nvim) colorscheme, see
 [neovim.md](neovim.md) instead.
 
@@ -69,10 +70,10 @@ The script writes `~/.config/zed/themes/noir-dawn.json` from the JSON in
 There are two Herdr surfaces:
 
 - **Desktop app** — themed by `omarchy-theme-set-herdr-app`.
-- **CLI** — has no Omarchy integration. The script sets `[theme] name =
-  "terminal"` and comments out any `[theme.custom]` overrides, so Herdr follows
-  the Omarchy-themed terminal's ANSI palette. Reload with
-  `herdr server reload-config`.
+- **CLI** — has no Omarchy integration. The script writes the theme's palette
+  into `[theme.custom]` — sage accent, soft-black surfaces, theme greys — over
+  `[theme] name = "terminal"`, then reloads the server. This keeps Herdr's
+  accent sage instead of falling back to the terminal's grey.
 
 ### Claude Code, Pi, Hermes
 
