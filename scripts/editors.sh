@@ -132,7 +132,7 @@ describe() {
     zed)      echo "write ~/.config/zed/themes/noir-dawn.json (Omarchy has no Zed support)" ;;
     vscode)   echo "run omarchy-theme-set-vscode: local Omarchy theme + select it" ;;
     herdr-app) echo "run omarchy-theme-set-herdr-app --activate" ;;
-    herdr)    echo "write the Noir Dawn palette into Herdr's [theme.custom]" ;;
+    herdr)    echo "follow the terminal palette ([theme] name = \"terminal\")" ;;
     claude)   echo "run omarchy-theme-set-claude --activate" ;;
     pi)       echo "run omarchy-theme-set-pi --activate" ;;
     opencode) echo "make sure the CLI follows the terminal (theme = system)" ;;
@@ -158,7 +158,6 @@ apply_nvim() {
 
   if [[ -L "$target" ]] && [[ "$(readlink -f "$target")" == "$(readlink -f "$source")" ]]; then
     skip "already linked"
-    nvim_reload "$source"
     return 0
   fi
 
@@ -172,26 +171,6 @@ apply_nvim() {
   run ln -sfn "$source" "$target"
   applied "link theme.lua -> $source"
   note "prefer noir.nvim instead? see docs/neovim.md"
-  nvim_reload "$source"
-}
-
-# A theme switch rewrites the generated file; nvim's own hotreload usually
-# catches it, but an open session that missed it can be told directly.
-nvim_reload() {
-  local source="$1"
-  local scheme
-  scheme="$(sed -n 's/.*colorscheme = "\([^"]*\)".*/\1/p' "$source" | head -1)"
-  [[ -n "$scheme" ]] || return 0
-
-  local socket
-  for socket in "${XDG_RUNTIME_DIR:-/tmp}"/nvim.*/0 /tmp/nvim.*/0; do
-    [[ -S "$socket" ]] || continue
-    if (( DRY_RUN )); then
-      note "would reload nvim at $socket ($scheme)"
-    elif nvim --server "$socket" --remote-send "<Cmd>colorscheme $scheme<CR>" >/dev/null 2>&1; then
-      note "reloaded nvim at $socket ($scheme)"
-    fi
-  done
 }
 
 apply_zed() {
@@ -255,22 +234,15 @@ apply_herdr_app() {
 
 apply_herdr() {
   local cfg="${HERDR_CONFIG_PATH:-$HOME/.config/herdr/config.toml}"
-  local palette="$CURRENT_THEME/colors.toml"
 
   if [[ ! -f "$cfg" ]]; then
     warn "no Herdr config at $cfg"
     return 1
   fi
 
-  if [[ ! -f "$palette" ]]; then
-    warn "no theme palette at $palette"
-    note "run: omarchy theme set noir-dawn"
-    return 1
-  fi
-
   if (( DRY_RUN )); then
-    ok "would write the Noir Dawn palette into [theme.custom] in $cfg"
-    note "accent, surfaces and text come from $palette"
+    ok "would set [theme] name = \"terminal\" in $cfg"
+    note "and comment out [theme.custom] so the terminal palette wins"
     return 0
   fi
 
@@ -278,124 +250,31 @@ apply_herdr() {
   b="$(backup "$cfg")"
   note "backup: $b"
 
-  python3 - "$cfg" "$palette" <<'PY'
-import re
-import sys
-
-cfg_path, colors_path = sys.argv[1], sys.argv[2]
-
-
-def load_colors(path):
-    values = {}
-    for line in open(path, encoding="utf-8"):
-        match = re.match(r'^\s*([A-Za-z0-9_]+)\s*=\s*"#([0-9a-fA-F]{6})"', line)
-        if match:
-            values[match.group(1)] = match.group(2).lower()
-    return values
-
-
-colors = load_colors(colors_path)
-
-
-def role(name, fallback):
-    return "#" + colors.get(name, fallback)
-
-
-def rgb(value):
-    return tuple(int(value[i:i + 2], 16) for i in (1, 3, 5))
-
-
-def mix(base, top, amount):
-    low, high = rgb(base), rgb(top)
-    return "#" + "".join(
-        f"{round(a + (b - a) * amount):02x}" for a, b in zip(low, high)
-    )
-
-
-bg = role("background", "0c0b0c")
-fg = role("foreground", "c1c1c1")
-muted = role("muted", "666666")
-accent = role("accent", "8a9a7b")
-orange = role("orange", "9ca98f")
-blue = role("blue", "aaaaaa")
-cyan = role("cyan", "aa9988")
-
-# Herdr layers [theme.custom] over the base theme, so the base can stay
-# "terminal" (Omarchy-themed ANSI) while the palette below supplies the sage
-# accent and the soft-black surfaces.
-custom = [
-    "[theme.custom]",
-    f'accent = "{accent}"',
-    f'panel_bg = "{bg}"',
-    f'sidebar_bg = "{mix(bg, fg, 0.05)}"',
-    f'active_row_bg = "{mix(bg, fg, 0.14)}"',
-    f'selection_bg = "{role("selection_background", "333333")}"',
-    f'surface0 = "{mix(bg, fg, 0.08)}"',
-    f'surface1 = "{mix(bg, fg, 0.14)}"',
-    f'surface_dim = "{mix(bg, fg, 0.05)}"',
-    f'overlay0 = "{muted}"',
-    f'overlay1 = "{mix(muted, fg, 0.40)}"',
-    f'text = "{fg}"',
-    f'subtext0 = "{muted}"',
-    f'mauve = "{orange}"',
-    f'green = "{accent}"',
-    f'yellow = "{blue}"',
-    f'red = "{orange}"',
-    f'blue = "{cyan}"',
-    f'teal = "{cyan}"',
-    f'peach = "{orange}"',
-]
-
-lines = open(cfg_path, encoding="utf-8").read().splitlines()
-out = []
-section = None
-seen_theme = False
-inserted = False
-index = 0
-
-while index < len(lines):
-    line = lines[index]
-    header = re.match(r"^\s*\[([^\]]+)\]", line)
-
+  python3 - "$cfg" <<'PY'
+import re, sys
+path = sys.argv[1]
+lines = open(path, encoding="utf-8").read().splitlines()
+out, section, seen = [], None, False
+for line in lines:
+    header = re.match(r"^\s*\[([^\]]+)\]\s*(#.*)?$", line)
     if header:
-        name = header.group(1).strip()
-        if section == "theme" and name != "theme" and not inserted:
-            if out and out[-1].strip():
-                out.append("")
-            out.extend(custom)
-            out.append("")
-            inserted = True
-        section = name
-        if name.startswith("theme.custom"):
-            # Drop the old block; it is regenerated from the palette.
-            index += 1
-            while index < len(lines) and not re.match(r"^\s*\[", lines[index]):
-                index += 1
-            continue
-        seen_theme = seen_theme or name == "theme"
+        section = header.group(1).strip()
+        seen = seen or section == "theme"
         out.append(line)
-        index += 1
         continue
-
     if section == "theme" and re.match(r"^\s*name\s*=", line):
         out.append('name = "terminal"')
-        index += 1
         continue
-
+    if section and section.startswith("theme.custom"):
+        out.append(line if not line.strip() or line.lstrip().startswith("#") else "# " + line)
+        continue
     out.append(line)
-    index += 1
-
-if not inserted:
-    if seen_theme:
-        out.append("")
-        out.extend(custom)
-    else:
-        out = ["[theme]", 'name = "terminal"', ""] + custom + [""] + out
-
-open(cfg_path, "w", encoding="utf-8").write("\n".join(out) + "\n")
+if not seen:
+    out = ["[theme]", 'name = "terminal"', ""] + out
+open(path, "w", encoding="utf-8").write("\n".join(out) + "\n")
 PY
 
-  applied "write the Noir Dawn palette into Herdr"
+  ok "Herdr now follows the terminal palette"
   if pgrep -f "herdr server" >/dev/null 2>&1; then
     run herdr server reload-config || warn "could not reload the Herdr server"
   else
