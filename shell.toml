@@ -8,9 +8,11 @@ background       = "#0c0b0c"
 background-alpha = 1.0
 text             = "#c1c1c1"
 # Modules calling attention to themselves (recording, voxtype, alerts, updates).
-# Kept identical to `text`: quickshell paints active indicators with this token,
-# and Noir Dawn wants them white like every other icon.
-active           = "#c1c1c1"
+# Quickshell paints active bar icons with this token and takes it as the bar's
+# urgent color, so it must differ from `text`: the Agents widget recolors its
+# icon and its usage meters here once an account passes 90% of a window.
+# Muted brick red — attention without breaking the noir.
+active           = "#a55555"
 # Cross-axis size at font base-size 12. size-horizontal is the height of
 # top/bottom bars; size-vertical is the width of left/right bars. With
 # scale-with-font enabled, these grow/shrink with [font] base-size.
