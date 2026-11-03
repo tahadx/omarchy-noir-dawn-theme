@@ -22,6 +22,16 @@ self-contained in `docs/`:
 | Zed     | [Noir Dawn theme](docs/zed.md)               |
 | VS Code | [Noir Omarchy extension](docs/vscode.md)     |
 
+Or run the guided setup. It scans for installed editors and agents, asks before
+each one, and calls Omarchy's own theme hooks:
+
+```bash
+"$(omarchy theme dir noir-dawn)/scripts/editors.sh"
+```
+
+See [docs/editors.md](docs/editors.md) for what Omarchy themes automatically
+and what the script adds.
+
 ## Preview
 
 ![Noir Dawn preview](preview.png)
