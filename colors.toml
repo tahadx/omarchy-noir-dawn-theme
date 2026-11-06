@@ -11,12 +11,20 @@ foreground = "#c1c1c1"
 background = "#0c0b0c"
 
 # Selection colors
+# `selection` is a background token in Omarchy: btop rows, fcitx5 borders,
+# Hermes menus and similar surfaces paint with it, so it stays dark enough
+# for the warm grey text to read on top.
+selection = "#333333"
 selection_foreground = "#c1c1c1"
 selection_background = "#333333"
 
 # Background shades
+# `lighter_background` is the raised surface Omarchy reads for floating-window
+# titlebars and panels. It has to stay distinct from `background`, otherwise
+# the titlebar runs into the window it belongs to.
 bg = "#0c0b0c"
-lighter_bg = "#505050"
+lighter_background = "#1c1c1c"
+lighter_bg = "#1c1c1c"
 dark_bg = "#333333"
 darker_bg = "#0c0b0c"
 
@@ -26,7 +34,6 @@ light_fg = "#cacaca"
 bright_fg = "#d1d1d1"
 dark_fg = "#919191"
 muted = "#666666"
-selection = "#c1c1c1"
 
 # Accent hues
 red = "#8a9a7b"
